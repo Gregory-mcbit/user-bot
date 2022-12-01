@@ -85,9 +85,13 @@ try:
 
     @app.on_message()
     async def check_msg(client, message):
-        if any([word for word in key_phrases if word in message.text.lower()]) & (message.chat.id in tracked_chats_ids):
-            await app.send_message(message.from_user.id, phrase4user)
-            print(f"Сообщение отправлено пользователю {message.from_user.first_name} {message.from_user.last_name} из чата {message.chat.title}")
+        try:
+            if any([word for word in key_phrases if word in message.text.lower()]) & (message.chat.id in tracked_chats_ids):
+                await app.send_message(message.from_user.id, phrase4user)
+                print(f"Сообщение отправлено пользователю {message.from_user.first_name} {message.from_user.last_name} из чата {message.chat.title}")
+            
+            except:
+                pass
 
 
     app.run()
